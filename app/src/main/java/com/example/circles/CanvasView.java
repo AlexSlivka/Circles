@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -54,5 +55,14 @@ public class CanvasView extends View implements ICanvasView{
 
     }
 
-
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            gameManager.onTouchEvent(x,y);
+        }
+        invalidate();
+        return true;
+    }
 }
