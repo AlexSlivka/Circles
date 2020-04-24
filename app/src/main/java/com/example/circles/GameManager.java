@@ -25,7 +25,7 @@ public class GameManager {
 
     private void initEnemyCircles() {
         SimpleCircle mainCircleArea = mainCircle.getCirclaArea();
-        circles = new ArrayList<EnemyCircle>();
+        circles = new ArrayList<>();
         for (int i = 0; i < MAX_CIRCLES; i++) {
             EnemyCircle circle;
             do {
@@ -67,5 +67,12 @@ public class GameManager {
 
     public void onTouchEvent(int x, int y) {
         mainCircle.moveMainCircleWhenTouchAt(x, y);
+        moveCircles();
+    }
+
+    private void moveCircles() {
+        for (EnemyCircle circle:circles) {
+            circle.moveOneStep();
+        }
     }
 }
