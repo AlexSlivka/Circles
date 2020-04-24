@@ -1,8 +1,5 @@
 package com.example.circles;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-
 import java.util.ArrayList;
 
 public class GameManager {
@@ -73,37 +70,37 @@ public class GameManager {
 
     private void checkCollision() {
         SimpleCircle circleForDell = null;
-        for (EnemyCircle circle: circles ) {
-            if (mainCircle.isIntersect(circle)){
-                if (circle.isSmallerThan(mainCircle)){
+        for (EnemyCircle circle : circles) {
+            if (mainCircle.isIntersect(circle)) {
+                if (circle.isSmallerThan(mainCircle)) {
                     mainCircle.growRadius(circle);
                     circleForDell = circle;
                     calculateAndSetCirclesColor();
                     break;
                 } else {
-                    gameEnd();
+                    gameEnd("YOU LOSE!");
                     return;
                 }
-
             }
-
         }
         if (circleForDell != null) {
             circles.remove(circleForDell);
         }
-        if (circles.isEmpty()){
-            gameEnd();
+        if (circles.isEmpty()) {
+            gameEnd("YOU WIN!");
         }
     }
 
-    private void gameEnd() {
+    private void gameEnd(String text) {
+        canvasView.showMessage(text);
         mainCircle.initRadius();
         initEnemyCircles();
         canvasView.redraw();
+
     }
 
     private void moveCircles() {
-        for (EnemyCircle circle:circles) {
+        for (EnemyCircle circle : circles) {
             circle.moveOneStep();
         }
     }
